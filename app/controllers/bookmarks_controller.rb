@@ -18,9 +18,18 @@ class BookmarksController < ApplicationController
     redirect_to action: :index
   end
 
+  def destroy
+    # first find the object we want to delete
+    @bookmark = Bookmark.find(params[:id])
+    # destroy is better than delete because destroy will also remove any orphan rows from the database, as well as any child dependents
+    @bookmark.destroy
+    redirect_to action: :index
+  end
+
   private
 
   def bookmark_params
+    binding.pry
     params.require(:bookmark).permit(:url, :title, :comment, :favorite)
   end
 
