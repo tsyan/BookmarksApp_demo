@@ -18,6 +18,16 @@ class BookmarksController < ApplicationController
     redirect_to action: :index
   end
 
+  def edit
+    @bookmark = Bookmark.find(params[:id])
+  end
+
+  def update
+    @bookmark = Bookmark.find(params[:id])
+    @bookmark.update_attributes(bookmark_params)
+    redirect_to action: :index
+  end
+
   def destroy
     # first find the object we want to delete
     @bookmark = Bookmark.find(params[:id])
@@ -29,7 +39,6 @@ class BookmarksController < ApplicationController
   private
 
   def bookmark_params
-    binding.pry
     params.require(:bookmark).permit(:url, :title, :comment, :favorite)
   end
 
