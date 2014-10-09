@@ -1,5 +1,11 @@
 <h1>Bookmarkr Demo by Anna</h1>
 
-<% @bookmarks.each do |bookmark| %>
-  <p><%= bookmark.url %></p>
-<% end %>
+<ul>
+  <% @bookmarks.each do |bookmark| %>
+    <li>
+      <% if bookmark.favorite %> * <% end %>
+      <%= link_to bookmark.title, bookmark.url %>
+      <%= bookmark.comment %>
+    </li>
+  <% end %>
+</ul>
